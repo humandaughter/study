@@ -1,0 +1,7 @@
+.idea
+/upload/
+logs/
+/*.html
+*.log
+*.sql
+/bitrix/
