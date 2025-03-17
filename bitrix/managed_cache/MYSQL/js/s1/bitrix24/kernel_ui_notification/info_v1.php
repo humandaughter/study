@@ -1,1 +1,0 @@
-<?php $filesInfo = ["/bitrix/js/ui/notification/ui.notification.balloon.js" => "17422333919033","/bitrix/js/ui/notification/ui.notification.stack.js" => "17422333914813","/bitrix/js/ui/notification/ui.notification.center.js" => "17422333912785",]; ?>

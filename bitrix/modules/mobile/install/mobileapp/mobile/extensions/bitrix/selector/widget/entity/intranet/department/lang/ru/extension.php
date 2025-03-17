@@ -1,4 +1,0 @@
-<?php
-
-$MESS['SELECTOR_COMPONENT_START_TYPING_TO_SEARCH_DEPARTMENT'] = 'Начните печатать для выбора отдела';
-$MESS['SELECTOR_COMPONENT_PICK_DEPARTMENT'] = 'Отделы';

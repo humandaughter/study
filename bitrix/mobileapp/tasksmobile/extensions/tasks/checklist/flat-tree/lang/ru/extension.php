@@ -1,2 +1,0 @@
-<?php
-$MESS["TASKSMOBILE_TREE_CHECKLIST_ITEM_DEFAULT_TITLE"] = "Название пункта";

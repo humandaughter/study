@@ -1,4 +1,0 @@
-<?php
-$MESS["HUMAN_RESOURCES_ROLE_ADMIN"] = "Administrator";
-$MESS["HUMAN_RESOURCES_ROLE_DIRECTOR"] = "Supervisor";
-$MESS["HUMAN_RESOURCES_ROLE_EMPLOYEE"] = "Employee";

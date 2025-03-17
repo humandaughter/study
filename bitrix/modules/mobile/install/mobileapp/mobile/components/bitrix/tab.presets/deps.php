@@ -1,6 +1,0 @@
-<?
-return [
-	'extensions' => [
-		'tab.presets'
-	],
-];

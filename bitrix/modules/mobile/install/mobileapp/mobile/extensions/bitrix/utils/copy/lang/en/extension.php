@@ -1,2 +1,0 @@
-<?php
-$MESS["MOBILE_COPY_DEFAULT_NOTIFICATION_TITLE"] = "Text copied";
