@@ -1,20 +1,19 @@
 <?php
 
-class CustomLogger
+use Bitrix\Main\Diag\FileLogger;
+class CustomLogger extends FileLogger
 {
-    private $logFile;
-
     public function __construct($logFile)
     {
-        $this->logFile = $logFile;
+        parent::__construct([
+            'file' => $logFile
+        ]);
     }
 
-    public function log($message)
+    public function log($message, array $context = [])
     {
         $currentDateTime = date('Y-m-d H:i:s');
-        $logEntry = "[{$currentDateTime}] OTUS: {$message}" . PHP_EOL;
-        file_put_contents($this->logFile, $logEntry, FILE_APPEND);
+        $customMessage = "[{$currentDateTime}] OTUS: {$message}";
+        parent::log($customMessage, $context);
     }
 }
-//$logger = new CustomLogger(__DIR__ . '/debug.log');
-//$logger->log('Тестовые логи');
