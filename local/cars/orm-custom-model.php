@@ -41,35 +41,11 @@ pr($cars);
 // добавление данных  записей в инфоблок Автомобили
 /*$dbResult = CarsTable::add([
         'NAME'=>'TEST',
-        'MANUFACTURER_ID'=>130,
-        'CITY_ID'=>126,
+        'MANUFACTURER_ID'=>33,
+        'CITY_ID'=>30,
         'MODEL'=>'X5',
         'ENGINE_VOLUME'=>'4',
         'PRODUCTION_DATE'=>date('d.m.Y'),
 ]);
 pr($dbResult);*/
 
-// удаление записи из БД
-// $res = \Bitrix\Iblock\Elements\ElementcarTable::delete(137);
-// pr($res);
-
-
-// редактирование записей в БД
-/*\Bitrix\Main\Loader::IncludeModule("iblock");
-// делаем запрос на тзменение поля NAME в записи с ID 138
-$res = \Bitrix\Iblock\Elements\ElementcarTable::update(138, array(
-    'NAME' => 'TEST 777',
-));
-pr($res);*/
-
-/*$cars = \Bitrix\Iblock\Elements\ElementcarTable::query() 
-    ->addSelect('NAME')
-    ->addSelect('MODEL') // имя свойства 
-    ->addSelect('ID')
-    ->setFilter(array('=ID' => 138))
-->fetchCollection(); 
-
-foreach ($cars as $car) {
-        $car->setModel('X5 TEST'); // изменение значения свойства MODEL
-        $car->save(); // сохранение данных
-}*/

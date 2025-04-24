@@ -7,8 +7,10 @@ use Bitrix\Main\Loader;
 use Bitrix\Iblock\Iblock;
 Loader::includeModule('iblock');
 
+echo "че нибудь";
+
 $iblockId = 16;
-$iblockElementId = 44;
+$iblockElementId = 36;
 
 // Old API 
 /*$arFilter = ['IBLOCK_ID' => $iblockId, 'ACTIVE' => 'Y'];
@@ -16,22 +18,13 @@ $arSelect = ['ID', 'NAME', 'CODE', 'PROPERTY_MODEL'];
 $res = CIBlockElement::GetList([], $arFilter, false, [], $arSelect);
 while($arFields = $res->fetch()){
     pr($arFields);
-}
+}*/
 
 
-$arFilter = ['IBLOCK_ID' => $iblockId];
-$arSelect = ['NAME'];
-$rsSect = CIBlockSection::GetList(['left_margin' => 'asc'], $arFilter, false, $arSelect, false);
-while ($arSect = $rsSect->fetch())
-{
-    pr($arSect);
-}
-
-
-$arElementProps = [
+// создание новой записи в инфоблоке через CIBlockElement
+/*$arElementProps = [
     'MODEL' => 'X5',
 ];
-
 $arIblockFields = [
     'IBLOCK_ID' => $iblockId,
     'NAME' => 'New element',
@@ -41,15 +34,15 @@ $objIblockElement = new \CIBlockElement();
 $objIblockElement->Add($arIblockFields);*/
 
 
-
 // ORM
 
-//get by id
-/*$iblock = Iblock::wakeUp($iblockId);
-$element = $iblock->getEntityDataClass()::getByPrimary($iblockElementId)->fetchObject();
+// ORM с использованием wakeUp
+// wakeUp - метод позволяет сохранить в переменную элемент инфоблока с которым можно работать как с объектом ORM
 
-// get props
-$element = $iblock->getEntityDataClass()::getByPrimary(
+// с параметром получает IBLOCK_ID
+//get by id 
+/*$iblock = Iblock::wakeUp($iblockId);
+$element = $iblock->getEntityDataClass()::getByPrimary(  // get props
 	$iblockElementId, 
 	['select' => ['NAME', 'MODEL']])
 ->fetchObject();
@@ -60,9 +53,12 @@ pr($name);
 
 $model = $element->get('MODEL')->getValue();
 echo 'MODEL: ';
-pr($model);*/
+pr($model);
+*/
 
 
+// ORM с использованием Element{код инфоблока}Table
+// Element{код инфоблока}Table - метод позволяет сохранить в переменную коллекцию объектов (элементов инфоблока)
 // get list
 /*$elements = \Bitrix\Iblock\Elements\ElementCarTable::getList([ // car - cимвольный код API инфоблока
     'select' => ['MODEL'], // имя свойства 
@@ -71,8 +67,10 @@ pr($model);*/
 foreach ($elements as $element) {
     pr('MODEL - '.$element->getModel()->getValue()); // получение значения свойства MODEL
 }
+*/
 
-// получение через query списка элементов
+// query - метод позволяет строить более гибкие и сложные запросы для выборки данных данных через ORM
+/*// получение через метод query списка элементов
 $elements = \Bitrix\Iblock\Elements\ElementCarTable::query() // car - cимвольный код API инфоблока
     ->addSelect('NAME')
     ->addSelect('MODEL') // имя свойства 
@@ -81,11 +79,11 @@ $elements = \Bitrix\Iblock\Elements\ElementCarTable::query() // car - cимво�
 
 foreach ($elements as $key => $item) {
     pr($item->getName().' '.$item->getModel()->getValue()); // получение значения свойства MODEL
-    // $value = $item->getModel()->getValue();
-    // if($value == 'Q7'){
-    //         $item->setModel('Q7 TEST'); // изменение значения свойства MODEL
-    //         $item->save(); // сохранение данных
-    // }
+    $value = $item->getModel()->getValue();
+    if($value == 'Q7'){
+            $item->setModel('Q7 TEST'); // изменение значения свойства MODEL
+            $item->save(); // сохранение данных
+    }
 }*/
 
 
@@ -101,7 +99,7 @@ while ($arIblockProps = $dbIblockProps->fetch()){
 // Получить список элементов инфоблока
 /*$dbItems = \Bitrix\Iblock\ElementTable::getList(array(
     'select' => array('ID', 'NAME', 'IBLOCK_ID'),
-    'filter' => array('IBLOCK_ID' => 26)
+    'filter' => array('IBLOCK_ID' => $iblockId)
 ));
 $items = [];
 while ($arItem = $dbItems->fetch()){  
@@ -116,3 +114,16 @@ while ($arItem = $dbItems->fetch()){
     $items [] = $arItem;
 }
 pr($items);*/
+
+
+// // редактирование записей в БД
+// \Bitrix\Main\Loader::IncludeModule("iblock");
+// // делаем запрос на изменение поля NAME в записи с ID 36
+// $res = \Bitrix\Iblock\Elements\ElementcarTable::update(36, array(
+//     'NAME' => 'TEST 777',
+// ));
+
+
+// удаление записи из БД
+// $res = \Bitrix\Iblock\Elements\ElementcarTable::delete(44);
+// pr($res);
